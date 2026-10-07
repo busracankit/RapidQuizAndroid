@@ -12,6 +12,13 @@ val Success = Color(0xFF22C55E)  // Doğru
 val Danger = Color(0xFFEF4444)   // Yanlış, son 1 sn
 val Warning = Color(0xFFFACC15)  // Sayaç 2 sn altı
 
+// Metin için koyu tonlar: success/danger krem zeminde 4.5:1 kontrastı sağlamıyor,
+// bu yüzden yazılarda bunlar, çerçeve/ikon/dolgu gibi yüzeylerde ana tokenlar kullanılır.
+val SuccessText = Color(0xFF15803D)
+val DangerText = Color(0xFFB91C1C)
+val AccentText = Color(0xFFC81E5B)
+val InkMuted = Color(0xFF4B4878)  // İkincil metin (krem ve beyaz üzerinde > 7:1)
+
 // Podyum
 val Gold = Color(0xFFF5B301)
 val Silver = Color(0xFFA8B0BD)

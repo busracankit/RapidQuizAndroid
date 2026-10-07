@@ -5,24 +5,36 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.busracankit.rapidquiz.util.LocalReduceMotion
+import com.busracankit.rapidquiz.util.rememberSystemReduceMotion
 
 // Yalnızca açık tema; koyu tema ve dinamik renk (Material You) bilerek yok.
 private val LightColorScheme = lightColorScheme(
     primary = Primary,
     onPrimary = Color.White,
+    primaryContainer = Primary.copy(alpha = 0.12f),
+    onPrimaryContainer = Ink,
     secondary = Accent,
     onSecondary = Color.White,
+    secondaryContainer = Primary.copy(alpha = 0.12f),
+    onSecondaryContainer = Ink,
     tertiary = Success,
     background = Bg,
     onBackground = Ink,
     surface = Surface,
     onSurface = Ink,
+    onSurfaceVariant = InkMuted,
+    surfaceVariant = Bg,
     surfaceContainer = Surface,
     surfaceContainerLow = Surface,
     surfaceContainerHigh = Surface,
-    error = Danger,
+    surfaceContainerHighest = Surface,
+    outline = Ink.copy(alpha = 0.25f),
+    outlineVariant = Ink.copy(alpha = 0.12f),
+    error = DangerText,
     onError = Color.White,
 )
 
@@ -33,16 +45,22 @@ object RapidShapes {
 }
 
 private val AppShapes = Shapes(
+    small = RoundedCornerShape(12.dp),
     medium = RapidShapes.Button,
     large = RapidShapes.Card,
 )
 
 @Composable
-fun RapidQuizTheme(content: @Composable () -> Unit) {
-    MaterialTheme(
-        colorScheme = LightColorScheme,
-        typography = Typography,
-        shapes = AppShapes,
-        content = content,
-    )
+fun RapidQuizTheme(
+    reduceMotion: Boolean = rememberSystemReduceMotion(),
+    content: @Composable () -> Unit,
+) {
+    CompositionLocalProvider(LocalReduceMotion provides reduceMotion) {
+        MaterialTheme(
+            colorScheme = LightColorScheme,
+            typography = Typography,
+            shapes = AppShapes,
+            content = content,
+        )
+    }
 }
