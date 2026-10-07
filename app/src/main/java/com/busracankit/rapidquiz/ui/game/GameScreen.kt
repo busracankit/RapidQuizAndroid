@@ -187,7 +187,8 @@ private fun CountdownOverlay(category: CategoryBrief?, startsAt: Long, now: () -
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.padding(24.dp),
+            // Küçük ekran + büyük yazı boyutunda taşmasın
+            modifier = Modifier.verticalScroll(rememberScrollState()).padding(24.dp),
         ) {
             category?.let {
                 Text(it.name, style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
