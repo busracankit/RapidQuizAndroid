@@ -9,12 +9,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.busracankit.rapidquiz.AppContainer
-import com.busracankit.rapidquiz.ui.home.HomeScreen
 import com.busracankit.rapidquiz.ui.game.GameScreen
 import com.busracankit.rapidquiz.ui.game.GameViewModel
+import com.busracankit.rapidquiz.ui.home.HomeScreen
 import com.busracankit.rapidquiz.ui.home.HomeViewModel
-import androidx.navigation.toRoute
+import com.busracankit.rapidquiz.ui.result.ResultScreen
+import com.busracankit.rapidquiz.ui.result.ResultViewModel
 import kotlinx.serialization.Serializable
 
 // Tip güvenli rotalar (docs/PROJE.md › 10.5)
@@ -46,6 +48,7 @@ fun RapidQuizNavHost(
                 },
             )
         }
+
         composable<GameRoute> { entry ->
             val route = entry.toRoute<GameRoute>()
             val vm = viewModel {
@@ -53,9 +56,24 @@ fun RapidQuizNavHost(
             }
             GameScreen(
                 viewModel = vm,
-                // Sonuç ekranı 6. adımda eklenecek; şimdilik ana ekrana dönülür.
-                onFinished = { navController.popBackStack<HomeRoute>(inclusive = false) },
+                // Sonuçtan geri gelince oyuna dönülmesin.
+                onFinished = {
+                    navController.navigate(ResultRoute) { popUpTo<GameRoute> { inclusive = true } }
+                },
                 onExit = { navController.popBackStack<HomeRoute>(inclusive = false) },
+            )
+        }
+
+        composable<ResultRoute> { entry ->
+            val vm = viewModel { ResultViewModel(container.repository, container.sessionHolder) }
+            ResultScreen(
+                viewModel = vm,
+                onPlayAgain = { slug ->
+                    if (entry.isResumed()) navController.navigate(GameRoute(slug)) { popUpTo<HomeRoute>() }
+                },
+                onOtherCategory = { navController.popBackStack<HomeRoute>(inclusive = false) },
+                // Skor tablosu 7. adımda eklenecek
+                onLeaderboard = { _ -> },
             )
         }
     }
