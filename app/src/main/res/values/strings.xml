@@ -50,6 +50,8 @@
     <string name="error_network">Sunucuya ulaşılamadı. İnternet bağlantını kontrol et.</string>
     <string name="error_session_lost">Oyun oturumu bulunamadı ya da süresi doldu. Yeni bir oyun başlat.</string>
     <string name="back_home">Ana sayfaya dön</string>
+    <!-- Ekran okuyucu: geri oku -->
+    <string name="back">Geri</string>
 
     <!-- Oyundan çıkış onayı -->
     <string name="quit_title">Oyundan çıkılsın mı?</string>

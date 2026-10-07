@@ -15,6 +15,8 @@ import com.busracankit.rapidquiz.ui.game.GameScreen
 import com.busracankit.rapidquiz.ui.game.GameViewModel
 import com.busracankit.rapidquiz.ui.home.HomeScreen
 import com.busracankit.rapidquiz.ui.home.HomeViewModel
+import com.busracankit.rapidquiz.ui.leaderboard.LeaderboardScreen
+import com.busracankit.rapidquiz.ui.leaderboard.LeaderboardViewModel
 import com.busracankit.rapidquiz.ui.result.ResultScreen
 import com.busracankit.rapidquiz.ui.result.ResultViewModel
 import kotlinx.serialization.Serializable
@@ -44,7 +46,7 @@ fun RapidQuizNavHost(
                     if (entry.isResumed()) navController.navigate(GameRoute(category.slug))
                 },
                 onLeaderboardClick = {
-                    // Skor tablosu 7. adımda eklenecek
+                    if (entry.isResumed()) navController.navigate(LeaderboardRoute())
                 },
             )
         }
@@ -72,8 +74,28 @@ fun RapidQuizNavHost(
                     if (entry.isResumed()) navController.navigate(GameRoute(slug)) { popUpTo<HomeRoute>() }
                 },
                 onOtherCategory = { navController.popBackStack<HomeRoute>(inclusive = false) },
-                // Skor tablosu 7. adımda eklenecek
-                onLeaderboard = { _ -> },
+                onLeaderboard = { target ->
+                    if (entry.isResumed()) {
+                        navController.navigate(LeaderboardRoute(target.slug, target.highlightId, target.myRank))
+                    }
+                },
+            )
+        }
+
+        composable<LeaderboardRoute> { entry ->
+            val route = entry.toRoute<LeaderboardRoute>()
+            val vm = viewModel {
+                LeaderboardViewModel(
+                    repository = container.repository,
+                    sessionHolder = container.sessionHolder,
+                    initialSlug = route.slug,
+                    highlightId = route.highlightId,
+                    myRank = route.myRank,
+                )
+            }
+            LeaderboardScreen(
+                viewModel = vm,
+                onBack = { if (entry.isResumed()) navController.popBackStack() },
             )
         }
     }
