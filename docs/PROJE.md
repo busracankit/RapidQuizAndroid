@@ -43,23 +43,23 @@ Uygulama tek bir **API kök adresi** (base URL) ile çalışır. Bu adres koda g
 
 | Ortam | Base URL | Not |
 | --- | --- | --- |
-| Canlı (planlanmıştı) | `https://rapidap.co` | **Yayında değil:** alan adı alınmadı, DigitalOcean'daki deneme kurulumu kapatıldı. |
+| Canlı (planlanmıştı) | `https://quizapp.co` | **Yayında değil:** alan adı alınmadı, DigitalOcean'daki deneme kurulumu kapatıldı. |
 | Yerel (Mac'te `runserver`) | Emülatör: `http://10.0.2.2:8000`, gerçek cihaz: `http://<Mac-IP>:8000` | Backend: `uv run manage.py runserver 0.0.0.0:8000` |
 
 Bütün uç noktalar `<base URL>/api/v1/` altındadır. Planlanan canlı adresle tam liste (yerelde `<base URL>` yerine yerel adres kullanılır):
 
 | # | Metot | Tam URL | Ne için |
 | --- | --- | --- | --- |
-| 1 | GET | `https://rapidap.co/api/v1/health/` | Sunucu ayakta mı (`{"status":"ok"}`) |
-| 2 | GET | `https://rapidap.co/api/v1/categories/` | Ana ekran ve skor tablosundaki kategori listesi |
-| 3 | POST | `https://rapidap.co/api/v1/sessions/` | Kategoriye dokununca oyunu başlatır, ilk soruyu döner |
-| 4 | POST | `https://rapidap.co/api/v1/sessions/{session_id}/answers/` | Cevap gönderir, sonucu ve sıradaki soruyu döner |
-| 5 | GET | `https://rapidap.co/api/v1/sessions/{session_id}/current/` | Uygulama arka plandan dönünce oyunu senkronlar |
-| 6 | GET | `https://rapidap.co/api/v1/sessions/{session_id}/result/` | Oyun sonu özeti (puan, doğru sayısı, süre) |
-| 7 | POST | `https://rapidap.co/api/v1/sessions/{session_id}/score/` | İsimle skor tablosuna kaydeder |
-| 8 | GET | `https://rapidap.co/api/v1/leaderboard/?category={slug}` | Kategorinin İlk 10 listesi |
+| 1 | GET | `https://quizapp.co/api/v1/health/` | Sunucu ayakta mı (`{"status":"ok"}`) |
+| 2 | GET | `https://quizapp.co/api/v1/categories/` | Ana ekran ve skor tablosundaki kategori listesi |
+| 3 | POST | `https://quizapp.co/api/v1/sessions/` | Kategoriye dokununca oyunu başlatır, ilk soruyu döner |
+| 4 | POST | `https://quizapp.co/api/v1/sessions/{session_id}/answers/` | Cevap gönderir, sonucu ve sıradaki soruyu döner |
+| 5 | GET | `https://quizapp.co/api/v1/sessions/{session_id}/current/` | Uygulama arka plandan dönünce oyunu senkronlar |
+| 6 | GET | `https://quizapp.co/api/v1/sessions/{session_id}/result/` | Oyun sonu özeti (puan, doğru sayısı, süre) |
+| 7 | POST | `https://quizapp.co/api/v1/sessions/{session_id}/score/` | İsimle skor tablosuna kaydeder |
+| 8 | GET | `https://quizapp.co/api/v1/leaderboard/?category={slug}` | Kategorinin İlk 10 listesi |
 
-Tam şema (OpenAPI): `https://rapidap.co/api/schema/`, tarayıcıda deneme: `https://rapidap.co/api/docs/`.
+Tam şema (OpenAPI): `https://quizapp.co/api/schema/`, tarayıcıda deneme: `https://quizapp.co/api/docs/`.
 
 ## 4. API sözleşmesi (v1)
 
@@ -452,7 +452,7 @@ android {
             buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8000/\"")
         }
         release {
-            buildConfigField("String", "API_BASE_URL", "\"https://rapidap.co/\"")
+            buildConfigField("String", "API_BASE_URL", "\"https://quizapp.co/\"")
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -464,7 +464,7 @@ android {
 }
 ```
 
-Canlı sunucuya debug'dan bağlanmak istersen debug'daki değeri geçici olarak `https://rapidap.co/` (veya DO adresi) yap. Retrofit base URL'si **`/` ile bitmeli.**
+Canlı sunucuya debug'dan bağlanmak istersen debug'daki değeri geçici olarak `https://quizapp.co/` (veya DO adresi) yap. Retrofit base URL'si **`/` ile bitmeli.**
 
 ### 9.2 İzinler ve HTTP (cleartext)
 
@@ -502,7 +502,7 @@ Release'te bu dosyalar yoktur, yalnızca HTTPS çalışır.
 | --- | --- | --- |
 | Emülatör | `http://10.0.2.2:8000/` | Backend `.env` → `DJANGO_ALLOWED_HOSTS`'a `10.0.2.2` ekle |
 | Gerçek telefon (aynı Wi-Fi) | `http://<Mac-IP>:8000/` | `runserver 0.0.0.0:8000`, IP'yi `ALLOWED_HOSTS`'a ve network_security_config'e ekle |
-| Canlı | `https://rapidap.co/` | Alan adı alınmış ve DO'ya bağlanmış olmalı |
+| Canlı | `https://quizapp.co/` | Alan adı alınmış ve DO'ya bağlanmış olmalı |
 
 ## 10. Mimari ve kod iskeleti
 
@@ -753,8 +753,8 @@ Yapılması gereken **ayarlar**:
 1. **Yerel geliştirme:** Android emülatörü Mac'e `10.0.2.2` adresiyle gelir, gerçek cihazlar Mac'in ağ adresiyle gelir. Django bu `Host` değerlerini tanımıyorsa `400 Bad Request` döner. Backend `.env` dosyasında:
    `DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,10.0.2.2,<mac-adı>.local,<mac-ip>`
    ve sunucu `uv run manage.py runserver 0.0.0.0:8000` ile başlatılır (yalnızca `127.0.0.1`'i dinlerse cihazlar ulaşamaz).
-2. **Canlı:** backend HTTPS ile yayında olmalı (DO kaynakları silindiyse `docs/deploy.md` › "Panelden kurulum" ile yeniden kurulur). `rapidap.co` alınıp DO'ya bağlandığında `api` bileşeninde:
-   `DJANGO_ALLOWED_HOSTS=rapidap.co,www.rapidap.co` ve `CSRF_TRUSTED_ORIGINS=https://rapidap.co,https://www.rapidap.co` (CSRF yalnızca admin paneli için).
+2. **Canlı:** backend HTTPS ile yayında olmalı (DO kaynakları silindiyse `docs/deploy.md` › "Panelden kurulum" ile yeniden kurulur). `quizapp.co` alınıp DO'ya bağlandığında `api` bileşeninde:
+   `DJANGO_ALLOWED_HOSTS=quizapp.co,www.quizapp.co` ve `CSRF_TRUSTED_ORIGINS=https://quizapp.co,https://www.quizapp.co` (CSRF yalnızca admin paneli için).
    iOS (ATS) ve Android (cleartext kapalı) canlıda yalnızca HTTPS'e izin verir. DO sertifikayı otomatik verir.
 3. **İsteğe bağlı, şimdilik gerek yok:** tüm kategorileri birleştiren "genel skor tablosu" istenirse yeni bir uç nokta (ör. `GET /api/v1/leaderboard/overall/`) gerekir, çünkü bugün API'de ve webde yok. Ayrıca mobil operatörler çok kullanıcıyı aynı IP'den çıkarabilir (CGNAT). Kullanıcı sayısı artarsa IP başına limitler (`THROTTLE_*`) gevşetilebilir.
 

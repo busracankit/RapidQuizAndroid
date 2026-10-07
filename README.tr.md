@@ -97,7 +97,9 @@ Projeyi Android Studio'da aç, Gradle senkronizasyonunu bekle ve `app` yapıland
 | Build | Varsayılan | Değiştirmek için |
 | --- | --- | --- |
 | debug | `http://10.0.2.2:8000/` | `~/.gradle/gradle.properties` içinde `rapidquiz.debugApiBaseUrl=…` |
-| release | `https://rapidap.co/` (planlanan alan adı, yayında değil) | `./gradlew assembleRelease -Prapidquiz.releaseApiBaseUrl=https://…/` |
+| release | yok (zorunlu) | `./gradlew assembleRelease -Prapidquiz.releaseApiBaseUrl=https://…/` |
+
+Yayında bir sunucu olmadığı için release build'de adres açıkça verilmelidir. Verilmezse build, bağlanamayan bir uygulama üretmek yerine anlaşılır bir mesajla durur.
 
 Aynı Wi-Fi'deki gerçek bir telefon için `rapidquiz.debugApiBaseUrl=http://<bilgisayarının-ip'si>:8000/` yaz. Sonra o IP'yi `network_security_config.xml` dosyasına ve backend'deki `DJANGO_ALLOWED_HOSTS` değerine ekle.
 

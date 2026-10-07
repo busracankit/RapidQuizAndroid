@@ -11,7 +11,7 @@ Tam proje dokümanı: **[docs/PROJE.md](docs/PROJE.md)**. Her işe başlamadan �
 - Zamanlama monoton saatle (`SystemClock.elapsedRealtime()`), geri bildirim süresi **bir kez** beklenir (PROJE.md › 5).
 - API yolları `/` ile biter. `AnswerRequest.choiceId`'ye varsayılan değer verme (`"choice_id": null` açıkça gitmeli).
 - `session_token` yalnızca bellekte tutulur, loglanmaz, kalıcı depoya yazılmaz.
-- Base URL `BuildConfig.API_BASE_URL`'den okunur (debug: `http://10.0.2.2:8000/`, release: `https://rapidap.co/`: planlanan alan adı, alınmadı, yayında değil).
+- Base URL `BuildConfig.API_BASE_URL`'den okunur (debug: `http://10.0.2.2:8000/`, release: `-Prapidquiz.releaseApiBaseUrl` ile zorunlu; koda alan adı gömülmez).
 - Kütüphane sürümleri `gradle/libs.versions.toml`'da; yeni bağımlılık eklemeden önce gerçekten gerekli mi diye bak.
 
 ## Git
@@ -45,4 +45,4 @@ Tam proje dokümanı: **[docs/PROJE.md](docs/PROJE.md)**. Her işe başlamadan �
 ## Bilinen eksikler / sonraya kalanlar
 
 - Uygulama ikonu varsayılan şablon ikonu (mağaza görselleriyle birlikte yapılacak).
-- Release varsayılan adresi `rapidap.co` planlanmıştı; alan adı alınmadı, yayında bir sunucu yok.
+- Yayında bir sunucu yok; `quizapp.co` planlanmıştı ama alan adı alınmadı.

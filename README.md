@@ -97,7 +97,9 @@ Open the project in Android Studio, let Gradle sync, and run the `app` configura
 | Build | Default | Override |
 | --- | --- | --- |
 | debug | `http://10.0.2.2:8000/` | `rapidquiz.debugApiBaseUrl=…` in `~/.gradle/gradle.properties` |
-| release | `https://rapidap.co/` (planned domain, not live) | `./gradlew assembleRelease -Prapidquiz.releaseApiBaseUrl=https://…/` |
+| release | none (required) | `./gradlew assembleRelease -Prapidquiz.releaseApiBaseUrl=https://…/` |
+
+There is no production server, so a release build needs the address explicitly. If it is missing, the build stops with a clear message instead of producing an app that cannot connect.
 
 On a physical phone on the same Wi-Fi, set `rapidquiz.debugApiBaseUrl=http://<your-computer-ip>:8000/`. Then add that IP to `network_security_config.xml` and to the backend's `DJANGO_ALLOWED_HOSTS`.
 

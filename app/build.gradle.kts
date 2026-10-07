@@ -4,6 +4,10 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+// Release sunucu adresi (debug ve testleri etkilemez)
+val releaseApiBaseUrl: String? = providers.gradleProperty("rapidquiz.releaseApiBaseUrl").orNull
+val releaseApiBaseUrlMissing = releaseApiBaseUrl.isNullOrBlank()
+
 android {
     namespace = "com.busracankit.rapidquiz"
     compileSdk {
@@ -30,10 +34,10 @@ android {
             buildConfigField("String", "API_BASE_URL", "\"$debugBaseUrl\"")
         }
         release {
-            // rapidap.co planlanan alan adıdır; alınmadı, şu an yayında bir sunucu yok.
-            // Release'i denemek için adres komut satırından verilir: -Prapidquiz.releaseApiBaseUrl=https://…/
-            val releaseBaseUrl = providers.gradleProperty("rapidquiz.releaseApiBaseUrl").orNull ?: "https://rapidap.co/"
-            buildConfigField("String", "API_BASE_URL", "\"$releaseBaseUrl\"")
+            // Canlı sunucu yok: release için adres her seferinde açıkça verilir, koda alan adı gömülmez.
+            //   ./gradlew assembleRelease -Prapidquiz.releaseApiBaseUrl=https://sunucu-adresi/
+            // Verilmezse aşağıdaki kontrol release görevlerini anlaşılır bir mesajla durdurur.
+            buildConfigField("String", "API_BASE_URL", "\"${releaseApiBaseUrl.orEmpty()}\"")
             // R8 (küçültme + optimizasyon). Kurallar: src/main/keepRules/rules.keep
             optimization {
                 enable = true
@@ -86,4 +90,18 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+// Adres verilmeden release APK/AAB üretilmesin (boş adresle uygulama açılışta çöker).
+tasks.configureEach {
+    val isReleaseOutput = name.endsWith("Release") &&
+        listOf("assemble", "bundle", "install", "package").any { name.startsWith(it) }
+    if (isReleaseOutput) {
+        val missing = releaseApiBaseUrlMissing
+        doFirst {
+            check(!missing) {
+                "Release için sunucu adresi gerekli: -Prapidquiz.releaseApiBaseUrl=https://sunucu-adresi/"
+            }
+        }
+    }
 }
