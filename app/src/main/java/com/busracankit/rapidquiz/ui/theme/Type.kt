@@ -25,9 +25,10 @@ val PlusJakartaSans = FontFamily(
 
 private val base = Typography()
 
-private fun TextStyle.heading() = copy(fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold, color = Ink)
+// Renk stile GÖMÜLMEZ: metin rengi bulunduğu yüzeyden gelir (krem/beyaz üstünde Ink, mor buton üstünde beyaz).
+private fun TextStyle.heading() = copy(fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold)
 private fun TextStyle.body(weight: FontWeight = FontWeight.Normal) =
-    copy(fontFamily = PlusJakartaSans, fontWeight = weight, color = Ink)
+    copy(fontFamily = PlusJakartaSans, fontWeight = weight)
 
 val Typography = Typography(
     displayLarge = base.displayLarge.heading(),
@@ -53,5 +54,4 @@ val QuestionTextStyle = TextStyle(
     fontWeight = FontWeight.SemiBold,
     fontSize = 22.sp,
     lineHeight = 30.sp,
-    color = Ink,
 )
