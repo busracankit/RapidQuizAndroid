@@ -95,6 +95,26 @@ fun GameScreen(
         if (phase == GamePhase.Finished) onFinished()
     }
 
+    // region kesintiler
+    // Arka plana gidince sayaç durur, dönünce GET /current/ ile senkronlanır (PROJE.md › 5.4).
+    LifecycleEventEffect(Lifecycle.Event.ON_STOP) { viewModel.onStop() }
+    LifecycleEventEffect(Lifecycle.Event.ON_START) { viewModel.onStart() }
+
+    // Geri tuşu/kaydırma: "Oyundan çıkılsın mı?"
+    var showQuitDialog by rememberSaveable { mutableStateOf(false) }
+    val inGame = phase !is GamePhase.Finished && phase !is GamePhase.Error
+    BackHandler(enabled = inGame) { showQuitDialog = true }
+    if (showQuitDialog && inGame) {
+        QuitDialog(
+            onConfirm = {
+                showQuitDialog = false
+                viewModel.quit()
+                onExit()
+            },
+            onDismiss = { showQuitDialog = false },
+        )
+    }
+    // endregion
 
     Scaffold(containerColor = Bg) { innerPadding ->
         Box(Modifier.fillMaxSize().padding(innerPadding)) {
