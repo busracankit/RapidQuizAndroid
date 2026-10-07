@@ -43,11 +43,10 @@ Uygulama tek bir **API kök adresi** (base URL) ile çalışır. Bu adres koda g
 
 | Ortam | Base URL | Not |
 | --- | --- | --- |
-| **Canlı (hedef)** | `https://rapidap.co` | Alan adı **henüz satın alınmadı** (deneme projesi). Alınıp DigitalOcean'a bağlanana kadar bu adrese istekler çalışmaz. |
-| Geçici canlı | `https://starfish-app-yuzxi.ondigitalocean.app` | DO'nun verdiği adres. DO kaynakları silindiyse çalışmaz. |
-| Yerel (Mac'te `runserver`) | `Emülatör: `http://10.0.2.2:8000`, gerçek cihaz: `http://<Mac-IP>:8000`` | Backend: `uv run manage.py runserver 0.0.0.0:8000` |
+| Canlı (planlanmıştı) | `https://rapidap.co` | **Yayında değil:** alan adı alınmadı, DigitalOcean'daki deneme kurulumu kapatıldı. |
+| Yerel (Mac'te `runserver`) | Emülatör: `http://10.0.2.2:8000`, gerçek cihaz: `http://<Mac-IP>:8000` | Backend: `uv run manage.py runserver 0.0.0.0:8000` |
 
-Bütün uç noktalar `<base URL>/api/v1/` altındadır. Canlı adresle tam liste:
+Bütün uç noktalar `<base URL>/api/v1/` altındadır. Planlanan canlı adresle tam liste (yerelde `<base URL>` yerine yerel adres kullanılır):
 
 | # | Metot | Tam URL | Ne için |
 | --- | --- | --- | --- |

@@ -25,12 +25,13 @@ android {
             // Emülatör → Mac'teki runserver. Gerçek cihaz ya da canlı için koda dokunmadan
             // ~/.gradle/gradle.properties veya komut satırında değiştirilebilir:
             //   rapidquiz.debugApiBaseUrl=http://192.168.1.20:8000/
-            //   rapidquiz.debugApiBaseUrl=https://starfish-app-yuzxi.ondigitalocean.app/
             // (Gerçek cihazda IP'yi src/debug/res/xml/network_security_config.xml'e de ekle.)
             val debugBaseUrl = providers.gradleProperty("rapidquiz.debugApiBaseUrl").orNull ?: "http://10.0.2.2:8000/"
             buildConfigField("String", "API_BASE_URL", "\"$debugBaseUrl\"")
         }
         release {
+            // rapidap.co planlanan alan adıdır; alınmadı, şu an yayında bir sunucu yok.
+            // Release'i denemek için adres komut satırından verilir: -Prapidquiz.releaseApiBaseUrl=https://…/
             val releaseBaseUrl = providers.gradleProperty("rapidquiz.releaseApiBaseUrl").orNull ?: "https://rapidap.co/"
             buildConfigField("String", "API_BASE_URL", "\"$releaseBaseUrl\"")
             // R8 (küçültme + optimizasyon). Kurallar: src/main/keepRules/rules.keep

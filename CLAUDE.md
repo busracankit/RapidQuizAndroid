@@ -11,7 +11,7 @@ Tam proje dokümanı: **[docs/PROJE.md](docs/PROJE.md)**. Her işe başlamadan �
 - Zamanlama monoton saatle (`SystemClock.elapsedRealtime()`), geri bildirim süresi **bir kez** beklenir (PROJE.md › 5).
 - API yolları `/` ile biter. `AnswerRequest.choiceId`'ye varsayılan değer verme (`"choice_id": null` açıkça gitmeli).
 - `session_token` yalnızca bellekte tutulur, loglanmaz, kalıcı depoya yazılmaz.
-- Base URL `BuildConfig.API_BASE_URL`'den okunur (debug: `http://10.0.2.2:8000/`, release: `https://rapidap.co/`).
+- Base URL `BuildConfig.API_BASE_URL`'den okunur (debug: `http://10.0.2.2:8000/`, release: `https://rapidap.co/`: planlanan alan adı, alınmadı, yayında değil).
 - Kütüphane sürümleri `gradle/libs.versions.toml`'da; yeni bağımlılık eklemeden önce gerçekten gerekli mi diye bak.
 
 ## Git
@@ -37,11 +37,12 @@ Tam proje dokümanı: **[docs/PROJE.md](docs/PROJE.md)**. Her işe başlamadan �
 - Birim testleri: `./gradlew testDebugUnitTest` (JSON, MockWebServer, zamanlama, sonuç/skor tablosu VM'leri)
 - UI testi (emülatör açıkken): `./gradlew connectedDebugAndroidTest` (sahte repository, sunucu gerekmez)
 - Debug sunucu adresini koda dokunmadan değiştirmek: `~/.gradle/gradle.properties` içinde
-  `rapidquiz.debugApiBaseUrl=http://192.168.1.20:8000/` (gerçek cihaz) ya da DO adresi.
-- Release'i DO adresiyle denemek: `./gradlew installRelease -Prapidquiz.releaseApiBaseUrl=https://starfish-app-yuzxi.ondigitalocean.app/`
+  `rapidquiz.debugApiBaseUrl=http://192.168.1.20:8000/` (gerçek cihaz).
+- Release'i bir adresle denemek: `./gradlew installRelease -Prapidquiz.releaseApiBaseUrl=https://<sunucu>/`
+  (Ekim 2026'da DigitalOcean'daki geçici kurulumla denendi; o sunucu kapatıldı, şu an yayında sunucu yok.)
 - Release şimdilik **debug anahtarıyla** imzalanıyor (yalnızca deneme için). Play'e yüklemeden önce gerçek keystore.
 
 ## Bilinen eksikler / sonraya kalanlar
 
 - Uygulama ikonu varsayılan şablon ikonu (mağaza görselleriyle birlikte yapılacak).
-- `rapidap.co` alınıp DO'ya bağlanana kadar release varsayılan adresi çalışmaz.
+- Release varsayılan adresi `rapidap.co` planlanmıştı; alan adı alınmadı, yayında bir sunucu yok.
