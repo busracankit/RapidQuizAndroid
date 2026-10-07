@@ -1,0 +1,59 @@
+<resources>
+    <!-- Arayüz metinleri (docs/PROJE.md › 7. bölüm, webdekiyle aynı) -->
+    <string name="app_name">Rapid Quiz</string>
+    <string name="slogan">20 soru. Her biri 5 saniye. Ne kadar hızlısın?</string>
+    <string name="leaderboard">Skor Tablosu</string>
+    <string name="pick_category">Bir kategori seç</string>
+    <string name="load_error_categories">Kategoriler yüklenemedi.</string>
+    <string name="retry">Tekrar dene</string>
+
+    <!-- Oyun -->
+    <string name="get_ready">Hazır ol!</string>
+    <string name="rules_hint">20 soru, her soru için 5 saniye · Hızlı cevap = daha çok puan (soru başı 150\'ye kadar) · Süre dolarsa soru boş sayılır · Geri dönüp cevap değiştiremezsin</string>
+    <string name="progress">%1$d/%2$d</string>
+    <string name="score">Puan</string>
+    <string name="seconds_left">%d saniye kaldı</string>
+    <string name="correct">Doğru!</string>
+    <string name="wrong">Yanlış!</string>
+    <string name="time_up">Süre doldu!</string>
+    <string name="correct_answer_was">Doğru cevap: %s</string>
+    <string name="points_plus">+%d</string>
+    <!-- Ekran okuyucu: "A şıkkı: Bulunamadı" -->
+    <string name="choice_a11y">%1$s şıkkı: %2$s</string>
+
+    <!-- Sonuç -->
+    <string name="result_title">Oyun bitti!</string>
+    <string name="result_correct">Doğru</string>
+    <string name="result_time">Toplam süre</string>
+    <string name="seconds_fmt">%s sn</string>
+    <string name="name_prompt">Skor tablosuna adını yaz</string>
+    <string name="name_placeholder">Adın (2–20 karakter)</string>
+    <string name="name_too_short">İsim en az 2 karakter olmalı.</string>
+    <string name="save">Kaydet</string>
+    <string name="saving">Kaydediliyor…</string>
+    <string name="already_saved">Skorun “%s” adıyla kaydedildi.</string>
+    <string name="see_leaderboard">Skor tablosunu gör</string>
+    <string name="play_again">Tekrar oyna</string>
+    <string name="other_category">Başka kategori</string>
+
+    <!-- Skor tablosu -->
+    <string name="top10">İlk 10</string>
+    <string name="leaderboard_empty">Henüz skor yok. İlk sen ol!</string>
+    <string name="you">Sen</string>
+    <string name="your_rank">Senin sıran: %d.</string>
+    <string name="n_correct">%d doğru</string>
+    <string name="points">puan</string>
+    <string name="load_error_leaderboard">Skor tablosu yüklenemedi.</string>
+
+    <!-- Hatalar -->
+    <string name="error_generic">Bir şeyler ters gitti. Lütfen tekrar dene.</string>
+    <string name="error_network">Sunucuya ulaşılamadı. İnternet bağlantını kontrol et.</string>
+    <string name="error_session_lost">Oyun oturumu bulunamadı ya da süresi doldu. Yeni bir oyun başlat.</string>
+    <string name="back_home">Ana sayfaya dön</string>
+
+    <!-- Oyundan çıkış onayı -->
+    <string name="quit_title">Oyundan çıkılsın mı?</string>
+    <string name="quit_message">İlerlemen kaybolacak.</string>
+    <string name="quit_confirm">Çık</string>
+    <string name="quit_cancel">Devam et</string>
+</resources>

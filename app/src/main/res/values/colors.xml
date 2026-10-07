@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Yalnızca XML tarafı (pencere arka planı, sistem çubukları). Compose renkleri: ui/theme/Color.kt -->
+    <color name="bg">#FFFFF8F1</color>
+    <color name="primary">#FF7C3AED</color>
+</resources>
