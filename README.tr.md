@@ -4,6 +4,21 @@
 
 Hızlı bir bilgi yarışmasının yerel Android istemcisi: **20 soru, her soru için 5 saniye, üyelik yok** ve **kategori bazlı İlk 10 skor tablosu**. Kotlin ve Jetpack Compose ile yazıldı.
 
+<table>
+  <tr>
+    <th align="center">Kategoriler</th>
+    <th align="center">Oyun</th>
+    <th align="center">Sonuç</th>
+    <th align="center">Skor Tablosu</th>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/home.png" width="200" alt="Kategoriler"></td>
+    <td><img src="docs/screenshots/game.png" width="200" alt="Oyun"></td>
+    <td><img src="docs/screenshots/result.png" width="200" alt="Sonuç"></td>
+    <td><img src="docs/screenshots/leaderboard.png" width="200" alt="Skor Tablosu"></td>
+  </tr>
+</table>
+
 > **Rapid Quiz'in bir parçası**
 >
 > | Repo | Rolü |
@@ -128,7 +143,3 @@ docs/PROJE.md                             # ayrıntılı proje dokümanı
 
 - Release build R8 kullanıyor, ancak cihazlarda denenebilmesi için geçici olarak debug anahtarıyla imzalanıyor. Google Play'e yüklemeden önce gerçek bir yükleme anahtarı gerekir.
 - Uygulama ikonu hâlâ varsayılan şablon ikonu.
-
-## Teşekkür
-
-Udemy'deki [HOCA ADI] tarafından hazırlanan [KURS ADI] kursunu takip ederken geliştirildi, ardından kendi tasarımım ve uygulamamla genişletildi.

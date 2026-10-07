@@ -4,6 +4,21 @@
 
 The native Android client for a fast-paced trivia game: **20 questions, 5 seconds each, no sign-up**, and a **Top 10 leaderboard per category**. It is built with Kotlin and Jetpack Compose.
 
+<table>
+  <tr>
+    <th align="center">Categories</th>
+    <th align="center">Game</th>
+    <th align="center">Result</th>
+    <th align="center">Leaderboard</th>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/home.png" width="200" alt="Categories"></td>
+    <td><img src="docs/screenshots/game.png" width="200" alt="Game"></td>
+    <td><img src="docs/screenshots/result.png" width="200" alt="Result"></td>
+    <td><img src="docs/screenshots/leaderboard.png" width="200" alt="Leaderboard"></td>
+  </tr>
+</table>
+
 > **Part of Rapid Quiz**
 >
 > | Repository | Role |
@@ -128,7 +143,3 @@ docs/PROJE.md                             # detailed project document (Turkish)
 
 - The release build uses R8, but it is temporarily signed with the debug key so it can be tested on devices. A real upload key is required before publishing to Google Play.
 - The launcher icon is still the default template icon.
-
-## Acknowledgements
-
-Built while following [KURS ADI] by [HOCA ADI] on Udemy, then extended with my own design and implementation.
