@@ -22,17 +22,25 @@ android {
 
     buildTypes {
         debug {
-            // Emülatör → Mac'teki runserver. Gerçek cihazda Mac'in IP'si: "http://192.168.1.20:8000/"
-            // Canlıya bağlanmak için geçici olarak "https://rapidap.co/" (veya DO adresi) yapılabilir.
-            buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8000/\"")
+            // Emülatör → Mac'teki runserver. Gerçek cihaz ya da canlı için koda dokunmadan
+            // ~/.gradle/gradle.properties veya komut satırında değiştirilebilir:
+            //   rapidquiz.debugApiBaseUrl=http://192.168.1.20:8000/
+            //   rapidquiz.debugApiBaseUrl=https://starfish-app-yuzxi.ondigitalocean.app/
+            // (Gerçek cihazda IP'yi src/debug/res/xml/network_security_config.xml'e de ekle.)
+            val debugBaseUrl = providers.gradleProperty("rapidquiz.debugApiBaseUrl").orNull ?: "http://10.0.2.2:8000/"
+            buildConfigField("String", "API_BASE_URL", "\"$debugBaseUrl\"")
         }
         release {
-            buildConfigField("String", "API_BASE_URL", "\"https://rapidap.co/\"")
-            // R8 (küçültme + karıştırma). Kurallar: src/main/keepRules/
+            val releaseBaseUrl = providers.gradleProperty("rapidquiz.releaseApiBaseUrl").orNull ?: "https://rapidap.co/"
+            buildConfigField("String", "API_BASE_URL", "\"$releaseBaseUrl\"")
+            // R8 (küçültme + optimizasyon). Kurallar: src/main/keepRules/rules.keep
             optimization {
                 enable = true
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
+            // GEÇİCİ: release'i emülatörde/telefonda denemek için debug anahtarıyla imzalanır.
+            // Google Play'e yüklemeden önce gerçek yükleme anahtarı (keystore) ile değiştirilmeli.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {

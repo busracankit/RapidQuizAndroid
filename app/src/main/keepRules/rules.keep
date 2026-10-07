@@ -1,12 +1,23 @@
-# Add project specific R8 rules here.
-# AGP will combine all keep rule files in src/main/keepRules to pass to R8
+# Rapid Quiz — R8 kuralları
+# AGP, src/main/keepRules altındaki bütün dosyaları R8'e verir.
 #
-# For more details, see
-#   https://d.android.com/r/tools/r8/keep-rules
+# Not: build.gradle.kts'deki optimization.packageScope şu an yalnızca androidx/kotlin/kotlinx
+# paketlerini optimize ediyor; uygulama kodu ve Retrofit/OkHttp dokunulmadan kalıyor.
+# Aşağıdaki kurallar packageScope genişletildiğinde (ya da kaldırıldığında) güvenli kalmak için.
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Yansıma ile okunan imzalar ve ek açıklamalar (Retrofit suspend + generic dönüş tipleri)
+-keepattributes Signature, InnerClasses, EnclosingMethod, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations, AnnotationDefault
+
+# Retrofit API arayüzü
+-keep,allowobfuscation interface com.busracankit.rapidquiz.data.api.RapidQuizApi
+
+# kotlinx.serialization: API modelleri ve tip güvenli navigasyon rotaları
+-keep,includedescriptorclasses class com.busracankit.rapidquiz.**$$serializer { *; }
+-keepclassmembers @kotlinx.serialization.Serializable class com.busracankit.rapidquiz.** {
+    *** Companion;
+    *** INSTANCE;
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclassmembers class com.busracankit.rapidquiz.**$Companion {
+    kotlinx.serialization.KSerializer serializer(...);
+}
